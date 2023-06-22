@@ -60,6 +60,7 @@ export const getProducts = async (req, res) => {
       return res.status(200).json({
         data: products,
         message: "Success",
+        path: process.env.PRODUCTS_PATH,
       });
     }
   } catch (error) {
@@ -232,40 +233,42 @@ export const updateProduct = async (req, res) => {
   }
 };
 
-export const deleteProduct = async(req,res) =>{
+export const deleteProduct = async (req, res) => {
   try {
     const product_id = req.params.product_id;
 
-    const productData = await productModel.findOne({_id:product_id})
+    const productData = await productModel.findOne({ _id: product_id });
 
     let thumbnail = productData.thumbnail;
-      if (req.files && req.files["thumbnail"]) {
-        thumbnail = req.files["thumbnail"][0].filename;
-        if (fs.existsSync("./uploads/products/" + productData.thumbnail)) {
-          fs.unlinkSync("./uploads/products/" + productData.thumbnail);
-        }
+    if (thumbnail) {
+      if (fs.existsSync("./uploads/products/" + thumbnail)) {
+        fs.unlinkSync("./uploads/products/" + thumbnail);
       }
+    }
 
-      let images = productData.images;
-      if (req.files && req.files["images"]) {
-        req.files["images"].forEach((file) => {
-          images.push(file.filename);
-        });
-        if (fs.existsSync("./uploads/products/" + productData.images)) {
-          fs.unlinkSync("./uploads/products/" + productData.images);
+    let images = productData.images;
+    if (images) {
+      images.split(", ").forEach((image) => {
+        if (fs.existsSync("./uploads/products/" + image)) {
+          fs.unlinkSync("./uploads/products/" + image);
         }
-      }
+      });
+    }
 
-      const removeData = await productModel.deleteOne({_id:product_id})
-      if(removeData.acknowledged){
-        return res.status(200).json({
-          data:removeData,
-          message:"Product Deleted Successfully"
-        })
-      }
+    const removeData = await productModel.deleteOne({ _id: product_id });
+    if (removeData.acknowledged) {
+      return res.status(200).json({
+        data: removeData,
+        message: "Product Deleted Successfully",
+      });
+    } else {
+      return res.status(404).json({
+        message: "Product Not Found",
+      });
+    }
   } catch (error) {
     return res.status(500).json({
-      msg: error.msg,
+      message: error.message,
     });
   }
-}
+};

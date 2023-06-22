@@ -3,10 +3,10 @@ import { getsubcategory ,getSingleSubCategory, addsubcategory , updateSubCategor
 import auth from "../middleware/auth.middleware";
 const subcategoryRouter = express.Router();
 
-subcategoryRouter.get('/get-sub-category',auth,getsubcategory)
-subcategoryRouter.post('/add-sub-category',auth,addsubcategory)
-subcategoryRouter.get('/get-single-sub-category/:subcategory_id',auth,getSingleSubCategory)
-subcategoryRouter.put('/update-sub-category/:subcategory_id',auth,updateSubCategory)
-subcategoryRouter.delete('/delete-sub-category/:subcategory_id',auth,deleteSubCategory)
+subcategoryRouter.get('/get-sub-category',getsubcategory)
+subcategoryRouter.post('/add-sub-category',addsubcategory)
+subcategoryRouter.get('/get-single-sub-category/:subcategory_id',getSingleSubCategory)
+subcategoryRouter.put('/update-sub-category/:subcategory_id',updateSubCategory)
+subcategoryRouter.delete('/delete-sub-category/:subcategory_id',deleteSubCategory)
 
 export default subcategoryRouter

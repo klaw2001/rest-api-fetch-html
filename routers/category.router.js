@@ -3,11 +3,11 @@ import { getCategories ,getSingleCategory, addCategory , updateCategory , detele
 import auth from "../middleware/auth.middleware";
 const categoryrouter = express.Router();
 
-categoryrouter.get('/get-categories',auth,getCategories)
-categoryrouter.get('/get-category/:category_id',auth,getSingleCategory)
-categoryrouter.post('/add-category',auth,addCategory)
-categoryrouter.put('/update-category/:category_id',auth,updateCategory)
-categoryrouter.delete('/delete-category/:category_id',auth,deteleCategory)
+categoryrouter.get('/get-categories',getCategories)
+categoryrouter.get('/get-category/:category_id',getSingleCategory)
+categoryrouter.post('/add-category',addCategory)
+categoryrouter.put('/update-category/:category_id',updateCategory)
+categoryrouter.delete('/delete-category/:category_id',deteleCategory)
 
 
 export default categoryrouter
