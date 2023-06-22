@@ -94,8 +94,8 @@ export const updateCategory = async (req, res) => {
       let image = categoryData.image;
       if (req.file !== undefined) {
         image = req.file.filename;
-        if (fs.existsSync("./uploads/category" + categoryData.image)) {
-          fs.unlinkSync("./uploads/category" + categoryData.image);
+        if (fs.existsSync("./uploads/category/" + categoryData.image)) {
+          fs.unlinkSync("./uploads/category/" + categoryData.image);
         }
       }
 
@@ -131,8 +131,8 @@ export const deteleCategory = async(req,res) =>{
     
         if (req.file !== undefined) {
             image = req.file.filename;
-            if (fs.existsSync("./uploads/category" + category.image)) {
-              fs.unlinkSync("./uploads/category" + category.image);
+            if (fs.existsSync("./uploads/category/" + category.image)) {
+              fs.unlinkSync("./uploads/category/" + category.image);
             }
           }
 

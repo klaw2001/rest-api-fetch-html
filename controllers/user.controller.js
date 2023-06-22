@@ -5,6 +5,7 @@ import Cookies from "cookies";
 import fs from "fs";
 import path from "path";
 import multer from "multer";
+import otpGenerator from "otp-generator"
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -225,6 +226,10 @@ export const signUp = async (req, res) => {
           msg: "User Already Exists.",
         });
       }
+      let otp = otpGenerator.generate(6, {
+        upperCaseAlphabets: false,
+        specialChars: false,
+      });
 
       const hashPassword = bcrypt.hashSync(password, 10);
       const userData = new userModel({
@@ -237,6 +242,7 @@ export const signUp = async (req, res) => {
         gender: gender,
         about: about,
         avatar: avatar,
+        otp:otp,
       });
       userData.save();
       if (userData) {

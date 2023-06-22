@@ -125,8 +125,8 @@ export const updateSubCategory = async (req,res)=>{
       let image = subcategoryData.image;
       if (req.file !== undefined) {
         image = req.file.filename;
-        if (fs.existsSync("./uploads/sub-category" + subcategoryData.image)) {
-          fs.unlinkSync("./uploads/sub-category" + subcategoryData.image);
+        if (fs.existsSync("./uploads/sub-category/" + subcategoryData.image)) {
+          fs.unlinkSync("./uploads/sub-category/" + subcategoryData.image);
         }
       }
 
@@ -162,8 +162,8 @@ export const deleteSubCategory = async (req,res) =>{
 
     if (req.file !== undefined) {
         image = req.file.filename;
-        if (fs.existsSync("./uploads/sub-category" + subcategory.image)) {
-          fs.unlinkSync("./uploads/sub-category" + subcategory.image);
+        if (fs.existsSync("./uploads/sub-category/" + subcategory.image)) {
+          fs.unlinkSync("./uploads/sub-category/" + subcategory.image);
         }
       }
 

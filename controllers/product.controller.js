@@ -179,8 +179,8 @@ export const updateProduct = async (req, res) => {
       let thumbnail = productData.thumbnail;
       if (req.files && req.files["thumbnail"]) {
         thumbnail = req.files["thumbnail"][0].filename;
-        if (fs.existsSync("./uploads/products" + productData.thumbnail)) {
-          fs.unlinkSync("./uploads/products" + productData.thumbnail);
+        if (fs.existsSync("./uploads/products/" + productData.thumbnail)) {
+          fs.unlinkSync("./uploads/products/" + productData.thumbnail);
         }
       }
 
@@ -241,8 +241,8 @@ export const deleteProduct = async(req,res) =>{
     let thumbnail = productData.thumbnail;
       if (req.files && req.files["thumbnail"]) {
         thumbnail = req.files["thumbnail"][0].filename;
-        if (fs.existsSync("./uploads/products" + productData.thumbnail)) {
-          fs.unlinkSync("./uploads/products" + productData.thumbnail);
+        if (fs.existsSync("./uploads/products/" + productData.thumbnail)) {
+          fs.unlinkSync("./uploads/products/" + productData.thumbnail);
         }
       }
 
@@ -251,8 +251,8 @@ export const deleteProduct = async(req,res) =>{
         req.files["images"].forEach((file) => {
           images.push(file.filename);
         });
-        if (fs.existsSync("./uploads/products" + productData.images)) {
-          fs.unlinkSync("./uploads/products" + productData.images);
+        if (fs.existsSync("./uploads/products/" + productData.images)) {
+          fs.unlinkSync("./uploads/products/" + productData.images);
         }
       }
 
